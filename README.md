@@ -15,8 +15,13 @@ El análisis cubre el entendimiento inicial de los datos (dimensiones, tipos de 
 
 ## Principales hallazgos
 
-Del total de 196391 contratos analizados, el 9.51% tuvo adición de plazo, el 21.79% quedó cerrado o terminado sin ejecutar presupuesto, y el 55.31% de los contratos cerrados o terminados quedó sin liquidar. La modalidad `Contratación régimen especial (con ofertas)` se identificó como el foco de riesgo más consistente, con los porcentajes más altos tanto de no ejecución (38.64%) como de cierre sin liquidar (81.74%). La modalidad `Licitación pública` presentó un riesgo específico de adición de plazo (18.65 días en promedio) y concentra sus contratos sin liquidar en los de mayor valor. La modalidad `Mínima cuantía`, aunque concentra el 60% del volumen total de contratos, no mostró señales de riesgo diferencial y no se recomienda como prioridad de focalización. El detalle completo de estos hallazgos, las pruebas estadísticas y sus limitaciones está en el notebook `02_estrategia_y_desarrollo.ipynb`.
-El informe ejecutivo con las tablas, gráficas y criterios de focalización propuestos está disponible en `docs/Informe_Ejecutivo_Taller1.docx`.
+Del total de 196391 contratos analizados, el 9.51% tuvo adición de plazo, el 21.79% quedó cerrado o terminado sin ejecutar presupuesto, y el 55.31% de los contratos cerrados o terminados quedó sin liquidar. Se evaluaron cuatro factores frente a estas tres señales: modalidad de contratación, valor del contrato, destino del gasto, y sector.
+
+`Sector` resultó ser el predictor más fuerte de todo el análisis (Cramér's V de 0.2815 frente a cierre sin liquidar). Los sectores `Ley de Justicia` (8676 contratos, 71.35% sin liquidar) y `Salud y Protección Social` (11097 contratos, 70.67% sin liquidar) son los hallazgos más sólidos y accionables, por combinar una tasa alta con un volumen de contratos grande. En contraste, `defensa` y `Servicio Público`, los dos sectores de mayor volumen, no muestran riesgo diferencial y no deberían priorizarse solo por su tamaño.
+
+La modalidad `Contratación régimen especial (con ofertas)` se mantiene como un foco transversal, con el porcentaje más alto de no ejecución (38.64%) y de cierre sin liquidar (81.74%) entre todas las modalidades. `Licitación pública` es un foco distinto, no destaca en esas dos señales, pero sí presenta un riesgo específico de adición de plazo (18.65 días en promedio) y concentra sus contratos sin liquidar en los de mayor valor. El valor del contrato y el destino del gasto, evaluados de forma independiente, resultaron ser predictores más débiles, el valor del contrato depende de con qué otra variable se combine, y el destino del gasto solo mostró una señal relevante en los registros con destino sin definir, más como una alerta de calidad de datos que como un criterio de focalización.
+
+El detalle completo de estos hallazgos, las pruebas estadísticas y sus limitaciones está en el notebook `02_estrategia_y_desarrollo.ipynb` y en el informe ejecutivo `docs/Informe_Ejecutivo_Taller1.docx`.
 
 ## Organización del repositorio
 
@@ -67,3 +72,11 @@ Se pueden instalar con:
 ```bash
 pip install pandas numpy matplotlib seaborn scipy pyarrow
 ```
+## Declaración de uso de Inteligencia Artificial
+
+Durante el desarrollo de este taller se usó Claude como asistente de apoyo, principalmente para tres cosas: 
+- Proponer código en Python para algunas secciones del entendimiento inicial, la limpieza de datos y las pruebas de hipótesis.
+- Sugerir posibles tecnicas estadísticas apropiadas según las hipotesis que se le planteaban (incluyendo pruebas no paramétricas como Kruskal-Wallis y Mann-Whitney U, y tamaños de efecto como eta cuadrado y Cramér's V)
+- Ayudar a definir el formato y secciones que deberia tener un informe ejecutivo (el informe fue redactado sobre la plantilla que generó Claude).
+  
+Adicionalmente, durante la escritura del código se tuvo activo GitHub Copilot en Visual Studio Code, por lo que en algunos momentos autocompletó fragmentos de código mientras se escribía.
