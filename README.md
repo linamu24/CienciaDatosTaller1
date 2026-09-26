@@ -29,6 +29,14 @@ CienciaDatosTaller1/
 │ └── 02_estrategia_y_desarrollo.ipynb # Puntos 2, 3 y 4: estrategia, hipótesis y resultados
 └── README.md
 
+## Requisitos previos: datos crudos
+
+Antes de ejecutar los notebooks es necesario tener el archivo de datos crudos `secop_bienes.parquet` dentro de la carpeta `data/`. Este archivo no se genera con el código, se descarga desde el enlace proporcionado por el curso:
+
+[Descargar secop_bienes.parquet](https://drive.google.com/file/d/1R0pSXh2bgCoPKcXlAlafdavVwvzZX6AQ/view?usp=sharing)
+
+Una vez descargado, ubícalo exactamente en `data/secop_bienes.parquet` (respetando el nombre y la ruta), ya que el notebook `01_entendimiento_inicial.ipynb` lo carga desde ahí al inicio. Sin este archivo, ningún notebook del repositorio podrá ejecutarse.
+
 ## Instrucciones de ejecución
 
 Los notebooks deben ejecutarse en este orden estricto:
