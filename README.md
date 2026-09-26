@@ -18,16 +18,20 @@ El análisis cubre el entendimiento inicial de los datos (dimensiones, tipos de 
 Del total de 196391 contratos analizados, el 9.51% tuvo adición de plazo, el 21.79% quedó cerrado o terminado sin ejecutar presupuesto, y el 55.31% de los contratos cerrados o terminados quedó sin liquidar. La modalidad `Contratación régimen especial (con ofertas)` se identificó como el foco de riesgo más consistente, con los porcentajes más altos tanto de no ejecución (38.64%) como de cierre sin liquidar (81.74%). La modalidad `Licitación pública` presentó un riesgo específico de adición de plazo (18.65 días en promedio) y concentra sus contratos sin liquidar en los de mayor valor. La modalidad `Mínima cuantía`, aunque concentra el 60% del volumen total de contratos, no mostró señales de riesgo diferencial y no se recomienda como prioridad de focalización. El detalle completo de estos hallazgos, las pruebas estadísticas y sus limitaciones está en el notebook `02_estrategia_y_desarrollo.ipynb`.
 
 ## Organización del repositorio
+
+```
 CienciaDatosTaller1/
 ├── data/
-│ ├── secop_bienes.parquet # Datos crudos originales
-│ └── secop_bienes_limpio.parquet # Datos limpios, generados por el notebook 01
+│   ├── secop_bienes.parquet              # Datos crudos originales (descargar, ver sección siguiente)
+│   └── secop_bienes_limpio.parquet       # Datos limpios, generados por el notebook 01
 ├── docs/
-│ └── EnunciadoTaller1.pdf # Enunciado del taller
+│   ├── EnunciadoTaller1.pdf               # Enunciado del taller
+│   └── Informe_Ejecutivo_Taller1.docx     # Informe ejecutivo del Punto 4, con tablas y gráficas
 ├── notebooks/
-│ ├── 01_entendimiento_inicial.ipynb # Punto 1: entendimiento inicial y calidad de datos
-│ └── 02_estrategia_y_desarrollo.ipynb # Puntos 2, 3 y 4: estrategia, hipótesis y resultados
+│   ├── 01_entendimiento_inicial.ipynb       # Punto 1: entendimiento inicial y calidad de datos
+│   └── 02_estrategia_y_desarrollo.ipynb     # Puntos 2, 3 y 4: estrategia, hipótesis y resultados
 └── README.md
+```
 
 ## Requisitos previos: datos crudos
 
