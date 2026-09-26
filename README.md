@@ -16,6 +16,7 @@ El análisis cubre el entendimiento inicial de los datos (dimensiones, tipos de 
 ## Principales hallazgos
 
 Del total de 196391 contratos analizados, el 9.51% tuvo adición de plazo, el 21.79% quedó cerrado o terminado sin ejecutar presupuesto, y el 55.31% de los contratos cerrados o terminados quedó sin liquidar. La modalidad `Contratación régimen especial (con ofertas)` se identificó como el foco de riesgo más consistente, con los porcentajes más altos tanto de no ejecución (38.64%) como de cierre sin liquidar (81.74%). La modalidad `Licitación pública` presentó un riesgo específico de adición de plazo (18.65 días en promedio) y concentra sus contratos sin liquidar en los de mayor valor. La modalidad `Mínima cuantía`, aunque concentra el 60% del volumen total de contratos, no mostró señales de riesgo diferencial y no se recomienda como prioridad de focalización. El detalle completo de estos hallazgos, las pruebas estadísticas y sus limitaciones está en el notebook `02_estrategia_y_desarrollo.ipynb`.
+El informe ejecutivo con las tablas, gráficas y criterios de focalización propuestos está disponible en `docs/Informe_Ejecutivo_Taller1.docx`.
 
 ## Organización del repositorio
 
