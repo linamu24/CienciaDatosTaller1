@@ -7,19 +7,26 @@
 
 ## Objetivo
 
-Analizar los contratos de bienes y suministros registrados en SECOP II entre 2019 y 2025 para identificar problemas de calidad de datos, entender el comportamiento general de la contratación pública en esta categoría, y proponer criterios de focalización de supervisión respaldados por evidencia estadística.
+Analizar los contratos de bienes y suministros registrados en SECOP II para identificar problemas de calidad de datos, establecer qué periodo es apropiado para el análisis, entender el comportamiento general de la contratación pública en esta categoría, y proponer criterios de focalización de supervisión respaldados por evidencia estadística.
 
 ## Alcance
 
-El análisis cubre el entendimiento inicial de los datos (dimensiones, tipos de variables, calidad), un análisis univariado de los cinco atributos más relevantes, la detección y tratamiento no destructivo de nueve problemas de calidad, y la formulación y contraste de hipótesis explícitas sobre si la modalidad de contratación (`modalidad_de_contratacion`) explica tres señales de desviación encontradas en los datos: adición de plazo, presupuesto no ejecutado, y cierre sin liquidar. El alcance se limita a esta única variable predictora categórica, no se ajustó un modelo multivariado que controle por otras variables simultáneamente (ver limitaciones en el notebook `02_estrategia_y_desarrollo.ipynb`, sección 4.4).
+El análisis cubre el entendimiento inicial de los datos (dimensiones, tipos de variables, calidad), un análisis univariado de los cinco atributos más relevantes, la detección y tratamiento no destructivo de nueve problemas de calidad, y la selección justificada del periodo de análisis. El dataset trae contratos firmados entre 2019 y 2025, pero 2019 registra el ciclo de vida del contrato de otra forma y 2025 aún tiene la mayoría de sus contratos sin cerrar, por lo que el análisis se hace sobre 2020-2024 (139853 contratos).
+
+Sobre ese periodo se formularon y contrastaron hipótesis explícitas sobre si cinco factores conocidos desde la firma del contrato (modalidad de contratación, valor, destino del gasto, sector y tipo de entidad) se asocian con tres señales de desviación: adición de plazo, presupuesto no ejecutado y cierre sin liquidar. Se estratificó el cruce entre sector y modalidad, pero no se ajustó un modelo multivariado que controle por todas las variables al mismo tiempo (ver limitaciones en el notebook `02_estrategia_y_desarrollo.ipynb`, sección 4.4).
 
 ## Principales hallazgos
 
-Del total de 196391 contratos analizados, el 9.51% tuvo adición de plazo, el 21.79% quedó cerrado o terminado sin ejecutar presupuesto, y el 55.31% de los contratos cerrados o terminados quedó sin liquidar. Se evaluaron cuatro factores frente a estas tres señales: modalidad de contratación, valor del contrato, destino del gasto, y sector.
+En el periodo 2020-2024, el 7.90% de los contratos tuvo adición de plazo, el 42.54% de los contratos cerrados o terminados no tiene ningún pago registrado, y el 57.40% de los contratos cerrados o terminados quedó sin liquidar.
 
-`Sector` resultó ser el predictor más fuerte de todo el análisis (Cramér's V de 0.2815 frente a cierre sin liquidar). Los sectores `Ley de Justicia` (8676 contratos, 71.35% sin liquidar) y `Salud y Protección Social` (11097 contratos, 70.67% sin liquidar) son los hallazgos más sólidos y accionables, por combinar una tasa alta con un volumen de contratos grande. En contraste, `defensa` y `Servicio Público`, los dos sectores de mayor volumen, no muestran riesgo diferencial y no deberían priorizarse solo por su tamaño.
+`Sector` resultó ser el predictor más fuerte (Cramér's V de 0.2939 frente a cierre sin liquidar). Sin embargo, al cruzarlo con la modalidad se encontró que el alto riesgo de `Salud y Protección Social` (73.36% sin liquidar) se explica en buena parte porque el 69.10% de sus contratos se firma por régimen especial, casi todos en hospitales y Empresas Sociales del Estado. Por eso los criterios propuestos son:
 
-La modalidad `Contratación régimen especial (con ofertas)` se mantiene como un foco transversal, con el porcentaje más alto de no ejecución (38.64%) y de cierre sin liquidar (81.74%) entre todas las modalidades. `Licitación pública` es un foco distinto, no destaca en esas dos señales, pero sí presenta un riesgo específico de adición de plazo (18.65 días en promedio) y concentra sus contratos sin liquidar en los de mayor valor. El valor del contrato y el destino del gasto, evaluados de forma independiente, resultaron ser predictores más débiles, el valor del contrato depende de con qué otra variable se combine, y el destino del gasto solo mostró una señal relevante en los registros con destino sin definir, más como una alerta de calidad de datos que como un criterio de focalización.
+- **Modalidades de régimen especial**, foco transversal: `Contratación régimen especial (con ofertas)` tiene la tasa más alta de no ejecución (82.97%) y de cierre sin liquidar (83.94%), y el efecto se mantiene dentro y fuera del sector Salud.
+- **Sectores `Ley de Justicia` y `Educación Nacional`**, con 70.73% y 68.42% sin liquidar y volumen alto. En Ley de Justicia el riesgo se concentra en Mínima cuantía.
+- **Entidades territoriales** (63.74% sin liquidar frente a 52.07% en las nacionales) y **contratos de funcionamiento** (48.88% sin pagos registrados frente a 32.65% en inversión).
+- **`Licitación pública`**, foco de plazos: el 23.71% de sus contratos recibió adición, frente a 6.13% en Mínima cuantía, y es la única modalidad donde los contratos sin liquidar son los de mayor valor.
+
+También se reportan resultados que no alcanzaron relevancia práctica: la diferencia en días de adición entre modalidades (13.31 días, bajo el umbral de 15), el valor del contrato usado como criterio aislado, y el carácter centralizado o descentralizado de la entidad. `defensa` y `Servicio Público`, los sectores de mayor volumen, no muestran riesgo diferencial y no deberían priorizarse solo por su tamaño. Entre las limitaciones, parte de la no ejecución refleja falta de registro de pagos en SECOP II, y la liquidación no siempre es obligatoria para las entidades de régimen especial.
 
 El detalle completo de estos hallazgos, las pruebas estadísticas y sus limitaciones está en el notebook `02_estrategia_y_desarrollo.ipynb` y en el informe ejecutivo `docs/Informe_Ejecutivo_Taller1.docx`.
 
@@ -34,7 +41,7 @@ CienciaDatosTaller1/
 │   ├── EnunciadoTaller1.pdf               # Enunciado del taller
 │   └── Informe_Ejecutivo_Taller1.docx     # Informe ejecutivo del Punto 4, con tablas y gráficas
 ├── notebooks/
-│   ├── 01_entendimiento_inicial.ipynb       # Punto 1: entendimiento inicial y calidad de datos
+│   ├── 01_entendimiento_inicial.ipynb       # Punto 1: entendimiento inicial, calidad de datos y periodo de análisis
 │   └── 02_estrategia_y_desarrollo.ipynb     # Puntos 2, 3 y 4: estrategia, hipótesis y resultados
 └── README.md
 ```
@@ -51,8 +58,8 @@ Una vez descargado, ubícalo exactamente en `data/secop_bienes.parquet` (respeta
 
 Los notebooks deben ejecutarse en este orden estricto:
 
-1. `notebooks/01_entendimiento_inicial.ipynb`. Carga `data/secop_bienes.parquet`, realiza el entendimiento inicial y la limpieza no destructiva de los datos, y al final guarda el resultado en `data/secop_bienes_limpio.parquet`. Este archivo es necesario para el siguiente notebook.
-2. `notebooks/02_estrategia_y_desarrollo.ipynb`. Carga `data/secop_bienes_limpio.parquet` (generado en el paso anterior) y desarrolla la estrategia de análisis, las pruebas de hipótesis, las visualizaciones multivariadas y el informe ejecutivo de resultados.
+1. `notebooks/01_entendimiento_inicial.ipynb`. Carga `data/secop_bienes.parquet`, realiza el entendimiento inicial y la limpieza no destructiva de los datos, justifica el periodo de análisis 2020-2024, y al final guarda el resultado en `data/secop_bienes_limpio.parquet`. Este archivo es necesario para el siguiente notebook.
+2. `notebooks/02_estrategia_y_desarrollo.ipynb`. Carga `data/secop_bienes_limpio.parquet` (generado en el paso anterior) y filtra el periodo 2020-2024 y desarrolla la estrategia de análisis, las pruebas de hipótesis, las visualizaciones multivariadas y el informe ejecutivo de resultados.
 
 Ambos notebooks están diseñados para ejecutarse de principio a fin sin errores usando "Restart & Run All" en Jupyter.
 
