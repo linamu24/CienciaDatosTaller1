@@ -1,4 +1,4 @@
-# CienciaDatosTaller1# Taller 1: Análisis exploratorio y criterios de focalización, SECOP II (Bienes y Suministros)
+# Taller 1: Análisis exploratorio y criterios de focalización, SECOP II (Bienes y Suministros)
 
 ## Integrantes
 
