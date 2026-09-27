@@ -26,46 +26,48 @@ En el periodo 2020-2024, el 7.90% de los contratos tuvo adición de plazo, el 42
 - **Entidades territoriales** (63.74% sin liquidar frente a 52.07% en las nacionales) y **contratos de funcionamiento** (48.88% sin pagos registrados frente a 32.65% en inversión).
 - **`Licitación pública`**, foco de plazos: el 23.71% de sus contratos recibió adición, frente a 6.13% en Mínima cuantía, y es la única modalidad donde los contratos sin liquidar son los de mayor valor.
 
-También se reportan resultados que no alcanzaron relevancia práctica: la diferencia en días de adición entre modalidades (13.31 días, bajo el umbral de 15), el valor del contrato usado como criterio aislado, y el carácter centralizado o descentralizado de la entidad. `defensa` y `Servicio Público`, los sectores de mayor volumen, no muestran riesgo diferencial y no deberían priorizarse solo por su tamaño. Entre las limitaciones, parte de la no ejecución refleja falta de registro de pagos en SECOP II, y la liquidación no siempre es obligatoria para las entidades de régimen especial.
+También se reportan resultados que no alcanzaron relevancia práctica: la diferencia en días de adición entre modalidades (13.31 días, bajo el umbral de 15), el valor del contrato usado como criterio aislado, y el carácter centralizado o descentralizado de la entidad. `defensa` y `Servicio Público`, los sectores con más contratos, no muestran más riesgo que el promedio y no deberían priorizarse solo por su tamaño. Entre las limitaciones, parte de la no ejecución refleja falta de registro de pagos en SECOP II, y la liquidación no siempre es obligatoria para las entidades de régimen especial.
 
-El detalle completo de estos hallazgos, las pruebas estadísticas y sus limitaciones está en el notebook `02_estrategia_y_desarrollo.ipynb` y en el informe ejecutivo `docs/Informe_Ejecutivo_Taller1.docx`.
+El detalle completo de estos hallazgos, las pruebas estadísticas y sus limitaciones está en el notebook `02_estrategia_y_desarrollo.ipynb` y en el informe ejecutivo, disponible en `docs/Informe_Ejecutivo_Taller1.pdf` y en su versión editable `docs/Informe_Ejecutivo_Taller1.docx`.
 
 ## Organización del repositorio
 
 ```
 CienciaDatosTaller1/
 ├── data/
-│   ├── secop_bienes.parquet              # Datos crudos originales (descargar, ver sección siguiente)
+│   ├── secop_bienes.parquet              # Datos crudos originales (incluidos en el repositorio)
 │   └── secop_bienes_limpio.parquet       # Datos limpios, generados por el notebook 01
 ├── docs/
 │   ├── EnunciadoTaller1.pdf               # Enunciado del taller
-│   └── Informe_Ejecutivo_Taller1.docx     # Informe ejecutivo del Punto 4, con tablas y gráficas
+│   ├── Informe_Ejecutivo_Taller1.docx     # Informe ejecutivo del Punto 4, con tablas y gráficas
+│   └── Informe_Ejecutivo_Taller1.pdf      # Versión en PDF del informe ejecutivo
 ├── notebooks/
 │   ├── 01_entendimiento_inicial.ipynb       # Punto 1: entendimiento inicial, calidad de datos y periodo de análisis
 │   └── 02_estrategia_y_desarrollo.ipynb     # Puntos 2, 3 y 4: estrategia, hipótesis y resultados
+├── requirements.txt                       # Dependencias con versiones probadas
 └── README.md
 ```
 
 ## Requisitos previos: datos crudos
 
-Antes de ejecutar los notebooks es necesario tener el archivo de datos crudos `secop_bienes.parquet` dentro de la carpeta `data/`. Este archivo no se genera con el código, se descarga desde el enlace proporcionado por el curso:
+El archivo de datos crudos `data/secop_bienes.parquet` ya está incluido en el repositorio, así que al clonarlo no hace falta descargar nada adicional. El notebook `01_entendimiento_inicial.ipynb` lo carga desde esa ruta.
+
+Si por alguna razón el archivo no está disponible, se puede descargar desde el enlace proporcionado por el curso y ubicarlo exactamente en `data/secop_bienes.parquet`, respetando el nombre y la ruta:
 
 [Descargar secop_bienes.parquet](https://drive.google.com/file/d/1R0pSXh2bgCoPKcXlAlafdavVwvzZX6AQ/view?usp=sharing)
-
-Una vez descargado, ubícalo exactamente en `data/secop_bienes.parquet` (respetando el nombre y la ruta), ya que el notebook `01_entendimiento_inicial.ipynb` lo carga desde ahí al inicio. Sin este archivo, ningún notebook del repositorio podrá ejecutarse.
 
 ## Instrucciones de ejecución
 
 Los notebooks deben ejecutarse en este orden estricto:
 
 1. `notebooks/01_entendimiento_inicial.ipynb`. Carga `data/secop_bienes.parquet`, realiza el entendimiento inicial y la limpieza no destructiva de los datos, justifica el periodo de análisis 2020-2024, y al final guarda el resultado en `data/secop_bienes_limpio.parquet`. Este archivo es necesario para el siguiente notebook.
-2. `notebooks/02_estrategia_y_desarrollo.ipynb`. Carga `data/secop_bienes_limpio.parquet` (generado en el paso anterior) y filtra el periodo 2020-2024 y desarrolla la estrategia de análisis, las pruebas de hipótesis, las visualizaciones multivariadas y el informe ejecutivo de resultados.
+2. `notebooks/02_estrategia_y_desarrollo.ipynb`. Carga `data/secop_bienes_limpio.parquet`, generado en el paso anterior, y lo filtra al periodo 2020-2024. Luego desarrolla la estrategia de análisis, las pruebas de hipótesis, las visualizaciones multivariadas y la generación de resultados.
 
 Ambos notebooks están diseñados para ejecutarse de principio a fin sin errores usando "Restart & Run All" en Jupyter.
 
 ## Dependencias
 
-El proyecto usa Python 3 con las siguientes librerías:
+El proyecto se probó con Python 3.13 y las siguientes librerías, cuyas versiones exactas están en `requirements.txt`:
 
 - pandas
 - numpy
@@ -73,12 +75,14 @@ El proyecto usa Python 3 con las siguientes librerías:
 - seaborn
 - scipy
 - pyarrow (necesaria para leer y escribir archivos `.parquet`)
+- ipykernel (para ejecutar los notebooks en Jupyter o VS Code)
 
 Se pueden instalar con:
 
 ```bash
-pip install pandas numpy matplotlib seaborn scipy pyarrow
+pip install -r requirements.txt
 ```
+
 ## Declaración de uso de Inteligencia Artificial
 
 Durante el desarrollo de este taller se usó Claude como asistente de apoyo, principalmente para tres cosas: 

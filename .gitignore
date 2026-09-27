@@ -1,2 +1,10 @@
-data/secop_bienes.parquet
-data/secop_bienes_limpio.parquet
+# macOS
+.DS_Store
+
+# Archivos temporales de Word
+~$*
+
+# Python y Jupyter
+__pycache__/
+.ipynb_checkpoints/
+.venv/
